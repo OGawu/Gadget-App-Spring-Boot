@@ -1,10 +1,7 @@
 package com.example.gadget;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,25 @@ public class GadgetController {
     @GetMapping
     public List<Gadget> getGadget(){
         return gadgetService.getGadget();
+    }
 
+    @PostMapping
+    public void registerNewGadget(@RequestBody Gadget gadget){
+        gadgetService.addNewGadget(gadget);
+
+    }
+
+    @DeleteMapping(path = "{gadgetId}")
+    public void deleteGadget(@PathVariable("gadgetId") Long gadgetId){
+        gadgetService.deleteGadget(gadgetId);
+    }
+
+    @PutMapping(path = "{gadgetId}")
+    public void updateGadget(
+            @PathVariable("gadgetId") Long gadgetId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String serialNumber){
+        gadgetService.updateGadget(gadgetId, name, serialNumber);
     }
 
 
