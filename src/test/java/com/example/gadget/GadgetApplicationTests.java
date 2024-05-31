@@ -8,6 +8,7 @@ class GadgetApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

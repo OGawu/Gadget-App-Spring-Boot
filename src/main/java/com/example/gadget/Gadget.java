@@ -1,13 +1,14 @@
 package com.example.gadget;
 
 
-
+//java -jar your-application.jar
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
-@Entity //Hibernate
-@Table //table in my db
+@Entity
+@Table
 public class Gadget {
     @Id
     @SequenceGenerator(
@@ -28,6 +29,7 @@ public class Gadget {
     private String model;
     private double price;
     private LocalDate purchaseDate;
+    @Transient
     private Integer age;
 
     public Gadget() {
@@ -35,8 +37,7 @@ public class Gadget {
 
     public Gadget(Long id, String name, String manufacturer,
                   String description, String serialNumber,
-                  String model, double price, LocalDate purchaseDate,
-                  Integer age) {
+                  String model, double price, LocalDate purchaseDate) {
         this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
@@ -45,13 +46,12 @@ public class Gadget {
         this.model = model;
         this.price = price;
         this.purchaseDate = purchaseDate;
-        this.age = age;
     }
 
     public Gadget(String name, String manufacturer,
                   String description, String serialNumber,
                   String model, double price,
-                  LocalDate purchaseDate, Integer age) {
+                  LocalDate purchaseDate) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.description = description;
@@ -59,7 +59,6 @@ public class Gadget {
         this.model = model;
         this.price = price;
         this.purchaseDate = purchaseDate;
-        this.age = age;
     }
 
 
@@ -128,7 +127,7 @@ public class Gadget {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.purchaseDate, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
@@ -150,3 +149,8 @@ public class Gadget {
                 '}';
     }
 }
+
+
+
+
+
