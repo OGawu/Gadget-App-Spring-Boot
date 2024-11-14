@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import static java.util.Calendar.FEBRUARY;
+import static java.util.Calendar.NOVEMBER;
+
 @Configuration
 public class GadgetConfig {
 
@@ -34,7 +37,7 @@ public class GadgetConfig {
                     LocalDate.of(2021,FEBRUARY,14)
 
             );
-            repository.saveAll(
+            repository.saveAll(List.of(iPhone, MacBook));
 
 
 
